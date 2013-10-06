@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   	Payment
+ * @package    	Strobe_OnDelivery
+ * @copyright   Copyright (c) 2010 Strobe IT Team
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Strobe_OnDelivery>
+            <version>0.9</version>
+        </Strobe_OnDelivery>
+    </modules>
+    <global>
+        <models>
+            <ondelivery>
+                <class>Strobe_OnDelivery_Model</class>
+            </ondelivery>
+        </models>
+        <resources>
+            <ondelivery_setup>
+                <setup>
+                    <module>Strobe_OnDelivery</module>
+                    <class>Strobe_OnDelivery_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ondelivery_setup>
+            <ondelivery_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ondelivery_write>
+            <ondelivery_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ondelivery_read>
+        </resources>
+        <blocks>
+            <ondelivery>
+                <class>Strobe_OnDelivery_Block</class>
+            </ondelivery>
+        </blocks>
+        <helpers>
+            <ondelivery>
+                <class>Strobe_OnDelivery_Helper</class>
+            </ondelivery>
+        </helpers>
+        <sales>
+            <order>
+                <statuses>
+                    <payment_confirmed_ondelivery translate="label">
+                        <label>Confirmed Payment by Bembos</label>
+                    </payment_confirmed_ondelivery>
+                </statuses>
+                <states>
+                    <processing>
+                        <statuses>
+                            <payment_confirmed_ondelivery/>
+                        </statuses>
+                        <visible_on_front/>
+                    </processing>
+                </states>
+            </order>
+        </sales>
+        <fieldsets>
+             <sales_convert_quote_payment>
+                <money_amount>
+                    <to_order_payment>*</to_order_payment>
+                </money_amount>
+             </sales_convert_quote_payment>
+        </fieldsets>
+    </global>
+    <frontend>
+        <routers>
+            <ondelivery>
+                <use>standard</use>
+                <args>
+                    <module>Strobe_OnDelivery</module>
+                    <frontName>ondelivery</frontName>
+                </args>
+            </ondelivery>
+        </routers>
+        <layout>
+            <updates>
+                <ondelivery>
+                    <file>ondelivery.xml</file>
+                </ondelivery>
+            </updates>
+        </layout>
+    </frontend>
+    <default>
+        <payment>
+            <ondelivery>
+                <active>0</active>
+                <title>OnDelivery</title>
+                <allowspecific>0</allowspecific>
+                <sort_order>0</sort_order>
+                <model>ondelivery/payment</model>
+            </ondelivery>
+        </payment>
+    </default>
+</config>
